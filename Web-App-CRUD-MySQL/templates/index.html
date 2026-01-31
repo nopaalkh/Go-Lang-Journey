@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lapor Pak! - Simple & Modern</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --bg-color: #f8fafc;
+            --text-dark: #1e293b;
+            --card-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            padding-top: 2rem;
+        }
+
+        /* Judul Utama */
+        .main-title {
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: var(--text-dark);
+        }
+
+        /* Kartu */
+        .modern-card {
+            background: #ffffff;
+            border: none;
+            border-radius: 24px;
+            box-shadow: var(--card-shadow);
+            padding: 2rem;
+            height: 100%;
+        }
+
+        .card-title-modern {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Input Form */
+        .form-control {
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            padding: 0.75rem 1rem;
+        }
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        .form-floating > label {
+            padding-left: 1rem;
+        }
+
+        /* Tombol Utama */
+        .btn-primary-modern {
+            background-color: var(--primary-color);
+            border: none;
+            border-radius: 12px;
+            padding: 0.8rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .btn-primary-modern:hover {
+            background-color: #1d4ed8;
+            transform: translateY(-1px);
+        }
+
+        /* Tabel */
+        .table-minimal th {
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            color: #64748b;
+            border-bottom: 2px solid #f1f5f9 !important;
+            padding-bottom: 1rem;
+        }
+        .table-minimal td {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            vertical-align: middle;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .table-minimal tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* Badge & Buttons */
+        .badge-modern {
+            padding: 0.5em 1em;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.85rem;
+        }
+        .badge-pending { background: #fff7ed; color: #c2410c; }
+        .badge-success { background: #f0fdf4; color: #15803d; }
+        
+        .btn-icon-soft {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            transition: all 0.2s;
+        }
+        .btn-success-soft { background: #dcfce7; color: #15803d; }
+        .btn-success-soft:hover { background: #bbf7d0; }
+        .btn-danger-soft { background: #fee2e2; color: #b91c1c; }
+        .btn-danger-soft:hover { background: #fecaca; }
+
+    </style>
+</head>
+<body>
+
+<div class="container pb-5">
+    <div class="row mb-5 text-center text-md-start align-items-center">
+        <div class="col-md-6">
+            <h1 class="main-title display-6"><span class="text-primary">Lapor</span>Pak!</h1>
+            <p class="text-muted mb-0">Layanan Aspirasi dan Pengaduan Online.</p>
+        </div>
+        <div class="col-md-6 text-md-end mt-3 mt-md-0">
+            <span class="badge bg-primary bg-opacity-10 text-primary px-3 py-2 rounded-pill">
+                <i class="bi bi-shield-check me-1"></i> Official System v1.0
+            </span>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        
+        <div class="col-md-4">
+            <div class="modern-card">
+                <div class="card-title-modern text-primary">
+                    
+                    Tulis Laporan
+                </div>
+
+                <form id="formLapor">
+                    <div class="form-floating mb-3">
+                        <input type="text" id="pelapor" class="form-control" placeholder="Nama" required>
+                        <label for="pelapor">Nama Lengkap</label>
+                    </div>
+                    
+                    <div class="form-floating mb-4">
+                        <textarea id="judul" class="form-control" placeholder="Keluhan" style="height: 140px" required></textarea>
+                        <label for="judul">Detail Keluhan Anda</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary-modern w-100 fw-bold">
+                        Kirim Sekarang
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="modern-card">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div class="card-title-modern mb-0">
+                        <i class="bi bi-activity me-2"></i>
+                        Daftar Aduan Masuk
+                    </div>
+                    <button onclick="loadData()" class="btn btn-light btn-sm rounded-pill px-3 text-muted border">
+                        <i class="bi bi-arrow-clockwise"></i> Reload
+                    </button>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-minimal table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th class="ps-3">#ID</th>
+                                <th>Pelapor</th>
+                                <th>Masalah</th>
+                                <th class="text-center">Status</th>
+                                <th class="text-end pe-3">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabelData">
+                            </tbody>
+                    </table>
+                    
+                    <div id="emptyState" class="text-center py-5 d-none">
+                        <img src="https://cdn-icons-png.flaticon.com/512/7486/7486754.png" width="100" class="mb-3 opacity-50" alt="Kosong">
+                        <p class="text-muted fw-medium">Belum ada data laporan.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const API_URL = '/laporan';
+
+    async function loadData() {
+        try {
+            let response = await fetch(API_URL); 
+            let result = await response.json();
+            let tbody = document.getElementById('tabelData');
+            let emptyState = document.getElementById('emptyState');
+            
+            tbody.innerHTML = ''; 
+
+            if (!result.data || result.data.length === 0) {
+                emptyState.classList.remove('d-none');
+                document.querySelector('.table-minimal').classList.add('d-none'); 
+                return;
+            } else {
+                emptyState.classList.add('d-none');
+                document.querySelector('.table-minimal').classList.remove('d-none');
+            }
+
+            let html = '';
+            result.data.forEach((item, index) => {
+                // Styling Status Baru (Soft Badge)
+                let statusBadge = item.status === 'Selesai' 
+                    ? '<span class="badge-modern badge-success"><i class="bi bi-check-circle-fill me-1"></i>Selesai</span>' 
+                    : '<span class="badge-modern badge-pending"><i class="bi bi-hourglass-split me-1"></i>Menunggu</span>';
+                
+                // Styling Tombol Aksi Baru (Soft Button)
+                let btnSelesai = item.status !== 'Selesai' 
+                    ? `<button class="btn-icon-soft btn-success-soft me-1" onclick="updateStatus(${item.id})" title="Selesai"><i class="bi bi-check-lg fs-5"></i></button>` 
+                    : '';
+
+                html += `
+                    <tr>
+                        <td class="ps-3 text-muted fw-medium">#${item.id}</td>
+                        <td>
+                            <div class="fw-bold text-dark">${item.pelapor}</div>
+                        </td>
+                        <td class="text-secondary" style="max-width: 250px;">
+                            <div class="text-truncate">${item.judul}</div>
+                        </td>
+                        <td class="text-center">${statusBadge}</td>
+                        <td class="text-end pe-3">
+                            ${btnSelesai}
+                            <button class="btn-icon-soft btn-danger-soft" onclick="hapusLaporan(${item.id})" title="Hapus"><i class="bi bi-trash fs-5"></i></button>
+                        </td>
+                    </tr>
+                `;
+            });
+            tbody.innerHTML = html;
+
+        } catch (error) { console.error("Error:", error); }
+    }
+
+    // FUNGSI KIRIM, UPDATE, HAPUS 
+    document.getElementById('formLapor').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        let btn = e.target.querySelector('button');
+        btn.innerHTML = 'Mengirim...'; btn.disabled = true;
+        let data = { pelapor: document.getElementById('pelapor').value, judul: document.getElementById('judul').value };
+        await fetch(API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+        document.getElementById('pelapor').value = ''; document.getElementById('judul').value = '';
+        loadData(); btn.innerHTML = 'Kirim Sekarang <i class="bi bi-arrow-right ms-2"></i>'; btn.disabled = false;
+    });
+
+    async function updateStatus(id) { if(!confirm("Tandai selesai?")) return; await fetch(`${API_URL}/${id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ status: "Selesai" }) }); loadData(); }
+    async function hapusLaporan(id) { if(!confirm("Hapus permanen?")) return; await fetch(`${API_URL}/${id}`, { method: 'DELETE' }); loadData(); }
+
+    loadData();
+</script>
+
+</body>
+</html>
