@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="id" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- STYLE KONSISTEN (SAMA DENGAN LOGIN) --- */
+        * { box-sizing: border-box; }
+
+        :root {
+            --primary-glow: #6366f1;
+            --accent-glow: #a855f7;
+            --bg-dark: #020617;
+            --card-bg: rgba(15, 23, 42, 0.75);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+                radial-gradient(at 100% 0%, hsla(225,39%,20%,1) 0, transparent 50%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: white;
+            overflow: hidden; /* Mencegah scrollbar muncul saat animasi */
+        }
+
+        .premium-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 28px;
+            padding: 4rem 2rem;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        /* --- STYLE KHUSUS 404 --- */
+        
+        .error-code {
+            font-size: 8rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 1rem;
+            
+            /* Efek Teks Gradient & Glow */
+            background: linear-gradient(135deg, #fff 0%, var(--primary-glow) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 15px rgba(99, 102, 241, 0.3));
+            
+            /* Animasi Melayang */
+            animation: float 6s ease-in-out infinite;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        p {
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 2.5rem;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        /* Tombol Kembali */
+        .btn-premium {
+            background: linear-gradient(135deg, var(--primary-glow), var(--accent-glow));
+            border: none;
+            border-radius: 14px;
+            padding: 16px 32px;
+            font-weight: 600;
+            color: white;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-premium:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.5);
+            color: white;
+        }
+
+        .btn-premium:active { transform: translateY(0); }
+
+        /* Dekorasi Latar Belakang (Bulatan Blur) */
+        .bg-decoration {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: var(--primary-glow);
+            filter: blur(90px);
+            opacity: 0.2;
+            border-radius: 50%;
+            z-index: -1;
+        }
+        .blob-1 { top: -50px; left: -50px; }
+        .blob-2 { bottom: -50px; right: -50px; }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-decoration blob-1"></div>
+    <div class="bg-decoration blob-2"></div>
+
+    <div class="premium-card">
+        <div class="error-code">404</div>
+        
+        <h2>Page Not Found</h2>
+        <p>Oops! Sepertinya Anda tersesat di antah berantah.<br>Halaman yang Anda cari tidak dapat ditemukan.</p>
+
+        <a href="/" class="btn-premium">
+            <i class="bi bi-house-door-fill"></i>
+            Back to Home
+        </a>
+    </div>
+
+</body>
+</html>

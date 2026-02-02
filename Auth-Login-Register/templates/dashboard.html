@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="id" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - User Area</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css" rel="stylesheet" crossorigin="anonymous">
+
+    <style>
+        * { box-sizing: border-box; }
+
+        :root {
+            --primary-glow: #6366f1;
+            --accent-glow: #a855f7;
+            --success-glow: #22c55e;
+            --bg-dark: #020617;
+            --card-bg: rgba(15, 23, 42, 0.75);
+            --border-color: rgba(255, 255, 255, 0.08);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
+            
+
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
+                radial-gradient(at 100% 0%, hsla(225,39%,20%,1) 0, transparent 50%),
+                radial-gradient(at 50% 100%, hsla(260,50%,15%,1) 0, transparent 50%);
+                
+            background-attachment: fixed; 
+            background-size: cover;
+            background-repeat: no-repeat;
+
+            min-height: 100vh;
+            color: #fff;
+            padding-bottom: 50px;
+        }
+
+        /* --- NAVBAR GLASS --- */
+        .glass-nav {
+            background: rgba(2, 6, 23, 0.7); 
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: white !important;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* --- KARTU DASHBOARD --- */
+        .dashboard-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-color);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 2rem;
+            height: 100%;
+            transition: transform 0.2s;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        /* --- PROFILE SECTION --- */
+        .profile-img-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 3px solid rgba(255,255,255,0.05);
+            padding: 4px;
+            background: rgba(255,255,255,0.02);
+        }
+
+        .verified-badge {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            width: 32px;
+            height: 32px;
+            background: var(--success-glow);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 4px solid var(--card-bg);
+            color: #000;
+            font-size: 1rem;
+        }
+
+        .user-handle {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+
+        /* --- STATS GRID --- */
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .icon-blue { background: rgba(99, 102, 241, 0.15); color: #818cf8; }
+        .icon-purple { background: rgba(168, 85, 247, 0.15); color: #c084fc; }
+        .icon-green { background: rgba(34, 197, 94, 0.15); color: #4ade80; }
+
+        .stat-value { font-size: 1.25rem; font-weight: 700; color: white; }
+        .stat-label { font-size: 0.85rem; color: rgba(255,255,255,0.5); }
+
+        /* --- TOMBOL --- */
+        .btn-outline-glass {
+            background: transparent;
+            border: 1px solid rgba(255,255,255,0.1);
+            color: white;
+            border-radius: 12px;
+            padding: 10px 20px;
+            transition: all 0.2s;
+            width: 100%;
+        }
+        .btn-outline-glass:hover {
+            background: rgba(255,255,255,0.05);
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        .btn-danger-glass {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            color: #f87171;
+            border-radius: 12px;
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .btn-danger-glass:hover {
+            background: rgba(239, 68, 68, 0.2);
+            color: #fff;
+        }
+
+        /* --- TABEL CUSTOM --- */
+        .table-glass {
+            width: 100%;
+            margin-top: 1rem;
+            border-collapse: separate; 
+            border-spacing: 0 8px; 
+        }
+        .table-glass th {
+            color: rgba(255,255,255,0.4);
+            font-weight: 600;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding-bottom: 10px;
+            padding-left: 16px;
+        }
+        .table-glass td {
+            background: rgba(255,255,255,0.02);
+            padding: 16px;
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.9);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-left: none;
+            border-right: none;
+        }
+        .table-glass tr td:first-child { 
+            border-top-left-radius: 12px; 
+            border-bottom-left-radius: 12px; 
+            border-left: 1px solid rgba(255,255,255,0.05);
+        }
+        .table-glass tr td:last-child { 
+            border-top-right-radius: 12px; 
+            border-bottom-right-radius: 12px; 
+            border-right: 1px solid rgba(255,255,255,0.05);
+        }
+
+        /* Badge Status */
+        .badge-status {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .bg-verified { background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.2); }
+        .bg-info-glass { background: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.2); }
+        .bg-new { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.2); }
+
+    </style>
+</head>
+<body>
+
+    <nav class="glass-nav mb-5">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="navbar-brand" href="#">
+                App Dashboard
+            </a>
+            <button onclick="confirmLogout()" class="btn btn-danger-glass d-flex align-items-center gap-2">
+                Sign Out
+            </button>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row g-4">
+            
+            <div class="col-lg-4">
+                <div class="dashboard-card text-center">
+                    <div class="profile-img-container mb-3">
+                        <img src="https://ui-avatars.com/api/?name={{ .user.NamaLengkap }}&background=6366f1&color=fff&size=200&bold=true" 
+                             alt="Profile" class="profile-img">
+                        <div class="verified-badge">
+                            <i class="bi bi-check-lg"></i>
+                        </div>
+                    </div>
+                    
+                    <h4 class="fw-bold mb-1">{{ .user.NamaLengkap }}</h4>
+                    <p class="user-handle mb-4">@{{ .user.Username }}</p>
+
+                    <div class="mb-4">
+                        <span class="badge-status bg-verified px-4 py-2">
+                            <i class="bi bi-patch-check-fill"></i> ACCOUNT VERIFIED
+                        </span>
+                    </div>
+                    
+                    <hr style="border-color: rgba(255,255,255,0.1); margin: 1rem 0;">
+
+                    <div class="mt-4 pt-3 text-start">
+                         <label class="stat-label mb-1">Registered Email</label>
+                         <div class="d-flex align-items-center gap-2 text-white">
+                             <i class="bi bi-envelope text-primary"></i>
+                             {{ .user.Email }}
+                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-8">
+                <div class="mb-4 ps-2">
+                    <h2 class="fw-bold text-white">Congratulations</h2>
+                    <p class="text-white-50">Completed. You did it</p>
+                </div>
+
+                <div class="row g-3 mb-4">
+                    <div class="col-md-4">
+                        <div class="dashboard-card p-3">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="stat-icon icon-blue"><i class="bi bi-shield-check"></i></div>
+                                <div>
+                                    <div class="stat-value">Active</div>
+                                    <div class="stat-label">Status</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="col-md-4">
+                        <div class="dashboard-card p-3">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="stat-icon icon-green"><i class="bi bi-lightning-charge"></i></div>
+                                <div>
+                                    <div class="stat-value">Online</div>
+                                    <div class="stat-label">Session</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <h5 class="fw-bold mb-3">Recent Activity</h5>
+                    <div class="table-responsive">
+                        <table class="table-glass">
+                            <thead>
+                                <tr>
+                                    <th>Activity</th>
+                                    <th>Date</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <i class="bi bi-box-arrow-in-right text-primary"></i>
+                                            Login to System
+                                        </div>
+                                    </td>
+                                    <td class="text-white-50">Just Now</td>
+                                    <td><span class="badge-status bg-verified">Success</span></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <i class="bi bi-envelope-check text-success"></i>
+                                            Email Verification
+                                        </div>
+                                    </td>
+                                    <td class="text-white-50">Today</td>
+                                    <td><span class="badge-status bg-verified">Verified</span></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <i class="bi bi-person-plus text-info"></i>
+                                            Account Registration
+                                        </div>
+                                    </td>
+                                    <td class="text-white-50">Today</td>
+                                    <td><span class="badge-status bg-new">Completed</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" crossorigin="anonymous"></script>
+
+    <script>
+        function confirmLogout() {
+            Swal.fire({
+                title: 'Sign Out?',
+                text: "Are you sure you want to end your session?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#ef4444',
+                cancelButtonColor: '#1e293b',
+                confirmButtonText: 'Yes, Sign Out',
+                background: '#020617',
+                color: '#fff',
+                iconColor: '#ef4444'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '/logout';
+                }
+            })
+        }
+    </script>
+</body>
+</html>
